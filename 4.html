@@ -4,7 +4,7 @@
 <style type="text/css">
 body
 {
-	background-color: 9bcd9b;					    /* arka plan ayarlaması */				
+	background-color: 00688b;					    /* arka plan ayarlaması */				
 }
 h1 
 {
@@ -12,12 +12,14 @@ h1
 	padding: 5px ;
 	font-size:75;
 	text-shadow: 2px 2px 5px #000;
+	color:191970;
 }
 h2	
 {
     text-align: center;								    /* 4. başlık ayarlaması */ 
     padding: 5px;
     font-size: 30;
+	color:191970;
 }
 a 
 {
@@ -37,14 +39,45 @@ table
 {
     margin: auto; 										/* Tablonun ortalanmasını sağlar */
     text-align: center;
-    background-color: c1ffc1;
+    background-color: 63b8ff;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom : none;
 }	
 #paragraf
 {
-	font-size: 20px;
+	font-size: 20px;																/* yazılan paragraflar için ayarlama */ 
 	line-height: 1.5;
 	text-align: justify;
 	font-family:Tahoma;
+	color:#D9D8D7;
+}
+#image-container:hover img 
+{
+  transform: scale(1.05);															/* Resimlerin üstüne gelince animasyon eklemesi */
+  transition: transform 0.3s ease;
+}
+#altyazı
+{
+text-align: center;	
+color:black;
+}
+table td 
+{
+																					/* Tablonun çizgilerini ayarlmak için ayarlama */ 	
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom : none;
+}
+#ilksatır
+{
+	background-color: 4682b4;
+}	
+#teksatırlar
+{
+	background-color: #5cacee;
 }
 </style>
 <title>Sitcom Dizi Önerileri</title> 
@@ -57,15 +90,16 @@ table
 <a href="index.html" > <img src = "dönüşbutonu.png" width=2% />  </a>
 
 <p id="anamenü"> ANA SAYFA </p> </a>
+<hr/>
 <br/><br/><br/><br/><br/><br/>
 <table border cellpadding=5 width=80% cellspacing=0>
-    <tr>
+    <tr id="ilksatır">
         <td>DİZİ ADI </td>
         <td>YAYINLANMA TARİHİ </td>
         <td>SEZON SAYISI  </td>
         <td>IMBD PUANI  </td>
     </tr>
-	<tr>
+	<tr id="teksatırlar">
 		<td>The Office</td>
         <td>2005-2013   </td>
         <td> 9 </td>
@@ -77,7 +111,7 @@ table
         <td>10</td>
         <td>8.9 </td>
 	</tr>
-	<tr>
+	<tr id="teksatırlar">
 		<td>Brooklyn Nine-Nine</td>
         <td>2013 - 2021 </td>
         <td>8  </td>
@@ -89,7 +123,7 @@ table
         <td>9 </td>
         <td>8.3 </td>
 	</tr>
-	<tr>
+	<tr id="teksatırlar" >
 		<td>The Big Bang Theory </td>
         <td>2007 - 2019 </td>
         <td>12 </td>
@@ -98,13 +132,19 @@ table
 	
 </table>
 <br/><br/><br/><br/><br/><br/>
-<p>
+<div id="image-container">
     <img src="theoffice.webp" width="45%" align="left" hspace="20" vspace="15" /> 
+</div>
     <h2> <em> The Office </em> </h2>
-</p>
+
 <p id="paragraf">
 "The Office", mizah, dram ve iş yaşamının gerçekçi yansımalarını bir araya getiren, televizyonun en ikonik yapımlarından biridir. Başrolünde, monoton bir ofis hayatını sürdüren Michael Scott ve çalışanları yer alır. Dizi, Scranton'daki bir kağıt şirketinin sıradan çalışanlarının günlük yaşamını konu alırken, komik anlar ve sürpriz gelişmelerle dolu bir ortam yaratır. Michael Scott’un absürt yönetim tarzı ve ofis arkadaşlarının birbirleriyle olan ilişkileri, izleyiciyi hem güldürür hem de duygusal olarak etkiler. "The Office", çalışma hayatının monotonluğuna mizahi bir bakış sunarken, insan ilişkilerinin derinliklerine inerek her bölümde izleyiciyi farklı bir duygusal yolculuğa çıkarır. Bu dizi, sadece bir komedi değil, aynı zamanda karakter gelişimi ve insan psikolojisini ustalıkla işleyen bir televizyon deneyimi sunar. Ve bizim öneri listemizin başında yer alır.
 </p>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+<hr/>
+<p id="altyazı">
+ © 2025 Dizi Kütüphanesi. Tüm hakları saklıdır.
+ </p>
 </body>
 
 

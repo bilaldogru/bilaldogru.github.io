@@ -4,40 +4,89 @@
 <style type="text/css">
 body
 {
-	background-color:008b8b;						/* arka plan ayarlaması */				
+	background-color:#1E2A47;							/* arka plan renk ayarlaması */				
 }
 h1 
 {
-	text-align:center ;								/* başlık ayarlaması */ 
+	text-align:center ;								    /* 1.başlık ayarlaması */ 
 	padding: 5px ;
 	font-size:75;
 	text-shadow: 2px 2px 5px #000;
+	color:#00868b;
 } 
 h2	
 {
-    text-align: center;																 /* 4. başlık ayarlaması */ 
+    text-align: center;									/* 2. başlık ayarlaması */ 
     padding: 5px;
-    font-size: 30;
+    font-size: 40;
+	color:#00868b;
 }
-#anamenü 
-{
+a 
+{														/* ana menü dönüşü için ayarlama */
     display: inline; 									/* Resim ve yazıyı yan yana hizalar */
     vertical-align: middle; 							/* Dikey ortalama */
     font-weight: bold;									/* Kalın yazı */
     text-decoration: none;								/* Alt çizgiyi kaldırır */
 }
+#anamenü 
+{														/* ana menü dönüşü için ayarlama */
+    display: inline; 									/* Resim ve yazıyı yan yana hizalar */
+    vertical-align: middle; 							/* Dikey ortalama */
+    font-weight: bold;									/* Kalın yazı */
+    text-decoration: none;								/* Alt çizgiyi kaldırır */
+	color:#00868b;
+}
 table
 {
-    margin: auto; 																	/* Tablonun ortalanmasını sağlar */
+    margin: auto; 										/* Tablo ayarlama bölümü */
     text-align: center;
-    background-color: 1874cd;
+    background-color: #00e5ee;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom : none;
+	
 }	
 #paragraf
 {
-	font-size: 20px;
+	font-size: 23px;																/* yazılan paragraflar için ayarlama */ 
 	line-height: 1.5;
 	text-align: justify;
 	font-family:Tahoma;
+	color:#D9D8D7;
+}
+#image-container:hover img 
+{
+  transform: scale(1.03);															/* Resimlerin üstüne gelince animasyon eklemesi */
+  transition: transform 0.3s ease;
+}
+#altyazı
+{
+text-align: center;	
+color:#00e5ee;
+}
+
+hr
+{
+    border: none; 																	/* siyah çizgi oluşması */
+    height: 1px;
+    background-color: black;
+}
+table td 
+{
+																					/* Tablonun çizgilerini ayarlmak için ayarlama */ 	
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom : none;
+}
+#ilksatır
+{
+	background-color:#00868b;
+}	
+#teksatırlar
+{
+	background-color: #00c5cd;
 }
 </style>
 <title>Animasyon Dizi Önerileri</title> 
@@ -46,43 +95,43 @@ table
 <body>
 
 <h1>Animasyon Önerileri </h1>
+<a id="anamenü" href="index.html" > <img src = "dönüşbutonu.png" width=2% />  </a>			<!-Ana sayfa dönüş linkini ayarlama ->
 
-<a id="anamenü" href="index.html" > <img src = "dönüşbutonu.png" width=2% />  </a>
-
-<p id="anamenü"> ANA SAYFA </p> </a>
+<p id="anamenü"> ANA SAYFA </p> </a>														<!-Ana sayfa dönüş yazısını ayarlama ->
+<hr/>
 <br/><br/><br/><br/><br/><br/>
-<table border cellpadding=5 width=80% cellspacing=0>
-    <tr>
+<table border cellpadding=5 width=80% cellspacing=0>										<!-Tablo  ayarlama bölgesi  ->
+    <tr id="ilksatır" >
         <td>DİZİ ADI </td>
         <td>YAYINLANMA TARİHİ </td>
         <td>SEZON SAYISI  </td>
         <td>IMBD PUANI  </td>
     </tr>
-	<tr>
+	<tr id="teksatırlar">
 		<td>Rick And Morty </td>
         <td>2013 -  </td>
         <td>7 +  </td>
         <td>9.1  </td>
 	</tr>
-	<tr>
+	<tr >
 		<td>Attack On Titan</td>
         <td>2013- 2023  </td>
         <td>4 </td>
         <td>9.1 </td>
 	</tr>
-	<tr>
+	<tr id="teksatırlar">
 		<td>Arcane </td>
         <td>2021 - 2024  </td>
         <td>2  </td>
         <td>9.0 </td>
 	</tr>
-	<tr>
+	<tr >
 		<td>Death Note</td>
         <td>2007- 2008  </td>
         <td>1  </td>
         <td>8.9 </td>
 	</tr>
-	<tr>
+	<tr id="teksatırlar">
 		<td>BoJack Horseman </td>
         <td>2014 - 2020  </td>
         <td>6  </td>
@@ -90,15 +139,19 @@ table
 	</tr>
 </table>
 <br/><br/><br/><br/><br/><br/>
-<p>
-    <img src="rickandmorty.jpg" width="45%" align="left" hspace="20" vspace="15" /> 
-    <h2> <em> Rick And Morty </em> </h2>
-</p>
-<p id="paragraf">
+<div id="image-container">
+    <img src="rickandmorty.jpg" width="45%" align="left" hspace="20" vspace="25" height="450" /> 	<!-Eklenen görselin ayarlama yeri  ->
+</div>
+    <h2> <em> Rick And Morty </em> </h2>												<!-Göresel içeriğinin başlığı ->
+<p id="paragraf"> 
 Rick and Morty, bilim kurgu, komedi ve macera unsurlarını bir araya getiren animasyon dizisidir. Başrolünde, dahi ama bir o kadar da sorumsuz bilim insanı Rick ve onun  torunu Morty yer alır. Bu ikili, evrenin dört bir yanındaki farklı boyutlara ve tehlikeli dünyalara giderek kaotik maceralara atılırlar. Dizi mizahi yönü, karanlık temaları ve sürükleyici hikayesiyle izleyiciyi içine çeker. Rick ve Morty'nin tehlikeli yolculukları, insanlık halleri, aile bağları ve etik sorular gibi derin konuları eğlenceli bir şekilde izleyiciye sunar. Rick and Morty, sıradan bir animasyon dizisinin ötesine geçerek, hem komik hem de düşündürücü bir deneyim sunar.Ve bizim öneri listemizin başında yer alır.
-</p>
+</p>																					<!- içerik ->
 
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<hr/>
+<p id="altyazı">
+ © 2025 Dizi Kütüphanesi. Tüm hakları saklıdır.
+ </p>
 
 </body>
 

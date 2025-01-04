@@ -3,27 +3,28 @@
 <style type="text/css">
 body
 {
-    background-color: 8b1a1a;														 /* Arka plan ayarlaması */				
+    background-color: #5e3300;												 /* Arka plan renk  ayarlaması */				
 }
 
 h1 
 {
-    text-align: center;																 /* Başlık ayarlaması */ 
+    text-align: center;																 /* 1.Başlık için ayarlama */ 
     padding: 5px;
     font-size: 500%;
     text-shadow: 2px 2px 5px #000;
+	color: #59381B ;
 } 
 
 table
 {
-    margin: auto; 																	/* Tablonun ortalanmasını sağlar */
+    margin: auto; 																	/* Tablo için ayalma  */
     text-align: center;
-    background-color: 1874cd;
+    background-color: #8C694A;
 }
 
 a:link 
 {
-    font-weight: bold;																 /* Linke basılmadan önceki hal ayarlaması */ 
+    font-weight: bold;																 /* Linke basılmadan önceki durum ayarlaması */ 
     text-decoration: none;
 	color:black;
 }
@@ -47,50 +48,56 @@ hr
 
 table td 
 {
-    background-color: ee3b3b;														 /* Tablo arka planı için */ 	
+    background-color: #8C694A;														 /* Tablo arka planı için ayarlama */ 	
 	border: none;
-	color: black;
+	color: #26190D;
 }
-
-h2 
-{
-    text-align: center;																 /* 2. başlık ayarlaması */ 
-    padding: 5px;
-    font-size: 30px;
-	font-family:Georgia;
-}
-
 h3 
 {
-    text-align: center; 															/* 3. başlık ayarlaması */ 
+    text-align: center; 															/* 3. başlık ayarlama*/ 
     padding: 5px;
     font-size: 50;
+	color:#59381B;
 }
 
 h4 
 {
     text-align: center;																 /* 4. başlık ayarlaması */ 
     padding: 5px;
-    font-size: 30px;
+    font-size: 25px;
+	color:#8C694A;
 }
 #paragraf
 {
-	font-size: 23px;
+	font-size: 23px;																/* yazılan paragraflar için ayarlama */ 
 	line-height: 1.5;
 	text-align: justify;
 	font-family:Tahoma;
+	color:#D9D8D7;
+}
+#image-container:hover img 
+{
+  transform: scale(1.05);															/* Resimlerin üstüne gelince animasyon eklemesi */
+  transition: transform 0.3s ease;
+}
+#altyazı
+{
+text-align: center;	
+color:#8C694A;
 }
 
+
 </style>
+<title>Dizi Kütüphanesi</title> 
 </head>
 
 <body>
 
-<h1>DİZİ KÜTÜPHANESİ</h1>
-<h2>Dizi Önerileri</h2>
+<h1>DİZİ KÜTÜPHANESİ</h1>					<!- başlık bölümü ->
+
 <hr/>
 
-<table  cellpadding=5 width=80% cellspacing=0>
+<table  cellpadding=5 width=80% cellspacing=0>				<!- Farklı linlerin oluşturulduğu tablo bölümü ayarlaması ->
     <tr>
         <td><a href="1.html">Animasyon</a></td>
         <td><a href="2.html">Aksiyon</a></td>
@@ -98,27 +105,32 @@ h4
         <td><a href="4.html">Sitcom</a></td>
     </tr>
 </table>
+					
+<br/><br/><br/> 	<!- satır boşluğu bırakma ->
 
-<h3>DİZİ DÜNYASINDAKİ GELİŞMELER</h3>
-<br/><br/><br/><br/> 
+<div id="image-container">
+    <img src="you.jpg" width="45%" align="left" hspace="20" vspace="40"  />	        <!-1. içeriğin resmi -> 
+</div>
+    <h4><em>YOU SEVENLERE MÜJDE</em></h4>											<!-1.paragrafın başlık bölümü -> 
 
-<p>
-    <img src="you.jpg" width="45%" align="left" hspace="20" vspace="15" /> 
-    <h4><em>YOU SEVENLERE MÜJDE</em></h4>
-</p>
 <p id="paragraf">
     Başrolünde Penn Badgley'nin "Joe Goldberg" karakteriyle bilinen popüler dizi You, beşinci ve final sezonuyla yayınlanmaya hazırlanıyor. Netflix tarafından yapılan açıklamaya göre, uzun süredir merakla beklenen bu sezonun yayın tarihi 2025 yılı olarak belirlendi. Psikolojik drama türündeki bu sürükleyici yapım, 2018 yılında ilk kez izleyiciyle buluştu ve bugüne kadar dört  sezon yayınladı. Seri, karanlık bir aşk hikayesini,saplantılı bir adamın hayatını başarılı bir şekilde izleyicilere aktardı. Beşinci sezonun, hikayeyi nasıl sonlandıracağı şimdiden büyük bir merak konusu.
-</p>
+</p>												<!-1.paragrafın içerik bölümü -> 
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/> 
 
-<p>
-    <img src="squidgame.webp" width="45%" align="right" hspace="20" vspace="15" /> 
-    <h4><em>SQUİD GAME İZLEYİCİLERİNE KÖTÜ HABER</h4>	
-</p>
+<div id="image-container">
+    <img src="squidgame.webp" width="45%" align="right" hspace="20" vspace="15" /> 	<!-2. içeriğin resmi ->
+    <h4><em>SQUİD GAME İZLEYİCİLERİNE KÖTÜ HABER</em></h4>								<!-2.paragrafın başlık bölümü ->
+</div>
 <p id="paragraf">
 	Netflix’in dünya çapında çok konuşulan dizisi Squid Game, ilk sezonuyla hem eleştirmenlerden hem de izleyicilerden tam not almıştı. Sürükleyici hikâyesi, derin karakter analizleri ve toplumsal eleştirileriyle dikkat çeken bu yapım, birçok kişinin beklentisini zirveye çıkarmıştı. Ancak 2. sezon, bu beklentileri karşılamaktan oldukça uzak kaldı.Birçok kesim tarafından eleştirilerin odağı olan dizi sonu belli olmayan bir şekilde son buldu.Kim bilir belki yeni bir sezon daha çekilir.
-</p>
+</p>					<!-2.paragrafın içerik bölümü -> 
 
+<br/><br/><br/><br/>
+<hr/>
+<p id="altyazı">
+ © 2025 Dizi Kütüphanesi. Tüm hakları saklıdır.
+ </p>
 </body>
 </html>
