@@ -1,103 +1,160 @@
-/* Genel Ayarlar ve Font */
+/* Genel Ayarlar ve Dark Tema */
 body {
-    font-family: 'Georgia', serif; /* Daha romantik bir font */
-    background-color: #fce4ec; /* Açık pembe arka plan */
-    color: #4a148c; /* Morumsu ana metin rengi */
+    font-family: 'Poppins', sans-serif; /* Modern ve okunaklı font */
+    background-color: #121212; /* Derin siyah arka plan (Dark Mode) */
+    color: #fce4ec; /* Açık pembe/krem metin rengi */
     margin: 0;
     padding: 0;
     text-align: center;
+    overflow-x: hidden; /* Yatay kaydırmayı engelle */
+}
+
+/* Kalp Animasyonları (Uçuşan Kalpler) */
+.kalp {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: #d81b60; /* Canlı pembe kalp */
+    transform: rotate(-45deg);
+    z-index: -1; /* Arka planda kalmasını sağla */
+    animation: ucus 15s infinite ease-in-out;
+}
+
+.kalp:before, .kalp:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d81b60;
+    border-radius: 50%;
+}
+
+.kalp:before { top: -10px; }
+.kalp:after { left: 10px; }
+
+/* Farklı pozisyonlar ve süreler */
+.kalp1 { top: 10%; left: 5%; animation-duration: 12s; }
+.kalp2 { top: 80%; left: 90%; animation-duration: 15s; }
+.kalp3 { top: 50%; left: 45%; animation-duration: 10s; }
+
+@keyframes ucus {
+    0% { transform: translate(0, 0) scale(0.8) rotate(-45deg); opacity: 0.8; }
+    50% { transform: translate(100px, 200px) scale(1.2) rotate(-45deg); opacity: 0.6; }
+    100% { transform: translate(0, 400px) scale(0.8) rotate(-45deg); opacity: 0.8; }
 }
 
 /* Başlık Alanı */
 header {
-    background-color: #880e4f; /* Koyu pembe/bordo arka plan */
-    color: white;
-    padding: 20px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #000000; /* Tam siyah */
+    color: #ff80ab; /* Neon pembe */
+    padding: 30px 0;
+    border-bottom: 2px solid #880e4f;
+    box-shadow: 0 4px 15px rgba(255, 0, 100, 0.2);
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    letter-spacing: 3px;
+    font-size: 3em;
+    text-shadow: 0 0 10px #ff80ab; /* Parıltı efekti */
 }
 
 /* Ana İçerik Alanı */
 main {
-    padding: 20px;
-    max-width: 900px; /* İçeriği ortalamak ve daraltmak için */
-    margin: 20px auto;
-    background-color: white;
+    padding: 30px;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.dark-box {
+    background-color: #1e1e1e; /* Koyu gri kutu */
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-section {
+    padding: 30px;
     margin-bottom: 40px;
-    padding: 20px;
+    box-shadow: 0 0 25px rgba(255, 128, 171, 0.1);
 }
 
-/* Mesaj ve Tarih Stilleri */
-#giris-mesaji h2 {
-    color: #d81b60; /* Daha canlı pembe */
+/* Etkileşim Butonu Stilleri */
+.interaktif-buton {
+    background-color: #d81b60; /* Canlı pembe buton */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+}
+
+.interaktif-buton:hover {
+    background-color: #ad1457; /* Koyu pembe hover */
+    transform: scale(1.05);
+}
+
+.gizli-mesaj {
+    margin-top: 25px;
+    font-size: 1.5em;
+    color: #ff80ab; /* Neon pembe mesaj */
     font-style: italic;
-}
-
-.mesaj-paragraf {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin: 20px 0;
-}
-
-.tarih, .sayac-bilgi {
-    font-size: 1em;
-    color: #ad1457;
-    font-weight: bold;
+    opacity: 0; /* Başlangıçta gizli */
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    text-shadow: 0 0 8px #ff80ab;
 }
 
 /* Fotoğraf Alanı */
 #fotograflar {
-    display: flex; /* Fotoğrafları yan yana dizer */
-    flex-wrap: wrap; /* Ekran küçülürse alt satıra geçmesini sağlar */
-    justify-content: space-around; /* Boşlukları eşit dağıtır */
-    gap: 20px; /* Fotoğraflar arası boşluk */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 }
 
 .foto-kapsayici {
-    width: 280px; /* Her bir fotoğraf bloğunun genişliği */
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #ffebee; /* Çok açık pembe */
+    width: 300px;
+    padding: 15px;
+    background-color: #2c2c2c;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.foto-kapsayici:hover {
+    transform: translateY(-10px) scale(1.02); /* Hafif yukarı kayma efekti */
 }
 
 .kare-foto {
-    width: 100%; /* Kapsayıcının %100'ü */
-    height: 250px; /* Yükseklik sabitleme */
-    object-fit: cover; /* Resmi keserek tam sığdırma */
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
     border-radius: 8px;
-    border: 3px solid #d81b60; /* Fotoğraf çerçevesi */
+    border: 4px solid #ff80ab; /* Neon çerçeve */
 }
 
-/* İmza Alanı */
+.foto-kapsayici p {
+    color: #ff80ab;
+    margin-top: 10px;
+}
+
+/* Kapanış ve İmza */
 #kapanis-mesaji h3 {
-    color: #4a148c;
-    font-size: 1.5em;
+    color: #ff80ab;
+    font-size: 2em;
 }
 
 .imza {
     font-style: italic;
-    font-weight: bold;
-    margin-top: 15px;
-    font-size: 1.1em;
+    font-weight: 300;
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #fce4ec;
 }
 
 /* Alt Bilgi */
 footer {
-    background-color: #880e4f;
-    color: white;
-    padding: 10px 0;
-    margin-top: 20px;
-    font-size: 0.8em;
+    background-color: #000000;
+    color: #555;
+    padding: 15px 0;
+    margin-top: 40px;
+    font-size: 0.9em;
+    border-top: 1px solid #333;
 }

@@ -3,34 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonsuz Aşkımız - [Adınız] ve [Kız Arkadaşınızın Adı]</title>
+    <title>Gecenin Işığı | Yıl Dönümümüz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div class="kalp kalp1"></div>
+    <div class="kalp kalp2"></div>
+    <div class="kalp kalp3"></div>
+
     <header>
-        <h1>Mutlu Yıl Dönümümüz! ❤️</h1>
+        <h1 class="yazi-animasyon">🌟 Birlikte Geçen Bir Yıl 🌟</h1>
     </header>
 
     <main>
-        <section id="giris-mesaji">
-            <h2>Canım [Kız Arkadaşınızın Adı],</h2>
+        <section id="giris-mesaji" class="dark-box">
+            <h2>Sana Özel Mesajım, [Kız Arkadaşınızın Adı]</h2>
             <p class="mesaj-paragraf">
-                Birlikte geçirdiğimiz bu harika yıl için sana ne kadar teşekkür etsem az. 
-                Seninle her anımız bir macera, her günümüz bir hediye.
+                Seninle olmak, karanlıkta yanıp sönen bir yıldız gibi. Her günümüz, ruhumuzu aydınlatan bir macera oldu.
             </p>
             <p class="tarih">
-                [Gün.Ay.Yıl] - [Gün.Ay.Yıl]
+                Başlangıcımız: [Gün.Ay.Yıl]
             </p>
             <p class="sayac-bilgi">
-                Tam **365** (veya kaç günse) gün oldu!
+                Bugüne kadar geçen süre: **[Tam Gün Sayısı]** Gün!
             </p>
+        </section>
+
+        <section id="etkilesim" class="dark-box">
+            <h3>Kalbinin Anahtarını Tıkla</h3>
+            <button id="gizli-mesaj-butonu" class="interaktif-buton">
+                Tıkla ve Oku 💌
+            </button>
+            <p id="gizli-mesaj-alani" class="gizli-mesaj"></p>
         </section>
 
         <section id="fotograflar">
             <div class="foto-kapsayici">
                 <img src="images/fotonuz.jpg" alt="Birlikte ilk fotoğrafımız" class="kare-foto">
-                <p>İlk tanıştığımız gün...</p>
+                <p>İlk tanıştığımız günün büyüsü...</p>
             </div>
             <div class="foto-kapsayici">
                 <img src="images/fotonuz2.png" alt="En sevdiğim tatil fotoğrafımız" class="kare-foto">
@@ -39,17 +50,33 @@
             </section>
 
         <section id="kapanis-mesaji">
-            <h3>Seni Çok Seviyorum!</h3>
-            <p>
-                Gelecek yıllarımızın da bugünden daha güzel olması dileğiyle...
-            </p>
-            <p class="imza">- Senin Aşkın, [Adınız]</p>
+            <h3 class="yazi-efekti">Sonsuzluğuma Hoş Geldin.</h3>
+            <p class="imza">- Seni Sonsuza Dek Seven, [Adınız]</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Sonsuz Aşkımız.</p>
+        <p>&copy; 2025 B.D. | Gecenin Işığı</p>
     </footer>
+
+    <script>
+        const mesajlar = [
+            "Seninle geçen her saniye, evrenin en güzel şarkısı.",
+            "Gözlerin, benim için tüm yıldızlardan daha parlak.",
+            "Aşkımız, zamanı durduran tek güçtür.",
+            "Yanımda olduğun sürece her zorluk bir maceradır.",
+            "Yüzündeki gülümseme, benim gün ışığım."
+        ];
+
+        document.getElementById('gizli-mesaj-butonu').addEventListener('click', function() {
+            const mesajAlani = document.getElementById('gizli-mesaj-alani');
+            // Mesajlar dizisinden rastgele bir mesaj seçme
+            const rastgeleIndex = Math.floor(Math.random() * mesajlar.length);
+            mesajAlani.textContent = mesajlar[rastgeleIndex];
+            mesajAlani.style.opacity = '1';
+            mesajAlani.style.transform = 'scale(1)';
+        });
+    </script>
     
 </body>
 </html>
