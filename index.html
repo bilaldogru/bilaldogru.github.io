@@ -1,136 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<style type="text/css">
-body
-{
-    background-color: #5e3300;												 		/* Arka plan renk  ayarlaması */				
-}
-
-h1 
-{
-    text-align: center;																 /* 1.Başlık için ayarlama */ 
-    padding: 5px;
-    font-size: 500%;
-    text-shadow: 2px 2px 5px #000;
-	color: #59381B ;
-} 
-
-table
-{
-    margin: auto; 																	/* Tablo için ayalma  */
-    text-align: center;
-    background-color: #8C694A;
-}
-
-a:link 
-{
-    font-weight: bold;																 /* Linke basılmadan önceki durum ayarlaması */ 
-    text-decoration: none;
-	color:black;
-}
-
-a:visited 
-{
-    text-decoration: none;															 /* Linkdeki Alt çizgiyi kaldırır */
-	color:black;
-}
-a:hover
-{
-		background-color:white; 													/* Fare ile üzerine gelince arka plan rengini değiştirir */
-}
-
-hr
-{
-    border: none; 																	/* Siyah çizgi oluşması */
-    height: 1px;
-    background-color: black;
-}
-
-table td 
-{
-    background-color: #8C694A;														 /* Tablo arka planı için ayarlama */ 	
-	border: none;
-	color: #26190D;
-}
-h3 
-{
-    text-align: center; 															/* 3. başlık ayarlama*/ 
-    padding: 5px;
-    font-size: 50;
-	color:#59381B;
-}
-
-h4 
-{
-    text-align: center;																 /* 4. başlık ayarlaması */ 
-    padding: 5px;
-    font-size: 25px;
-	color:#8C694A;
-}
-#paragraf
-{
-	font-size: 23px;																/* yazılan paragraflar için ayarlama */ 
-	line-height: 1.5;
-	text-align: justify;
-	font-family:Tahoma;
-	color:#D9D8D7;
-}
-#image-container:hover img 
-{
-  transform: scale(1.05);															/* Resimlerin üstüne gelince animasyon eklemesi */
-  transition: transform 0.3s ease;
-}
-#altyazı
-{
-text-align: center;	
-color:#8C694A;
-}
-
-
-</style>
-<title>Dizi Kütüphanesi</title> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonsuz Aşkımız - [Adınız] ve [Kız Arkadaşınızın Adı]</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>DİZİ KÜTÜPHANESİ</h1>									<!- başlık bölümü ->
+    <header>
+        <h1>Mutlu Yıl Dönümümüz! ❤️</h1>
+    </header>
 
-<hr/>
+    <main>
+        <section id="giris-mesaji">
+            <h2>Canım [Kız Arkadaşınızın Adı],</h2>
+            <p class="mesaj-paragraf">
+                Birlikte geçirdiğimiz bu harika yıl için sana ne kadar teşekkür etsem az. 
+                Seninle her anımız bir macera, her günümüz bir hediye.
+            </p>
+            <p class="tarih">
+                [Gün.Ay.Yıl] - [Gün.Ay.Yıl]
+            </p>
+            <p class="sayac-bilgi">
+                Tam **365** (veya kaç günse) gün oldu!
+            </p>
+        </section>
 
-<table  cellpadding=5 width=80% cellspacing=0>				<!- Farklı linlerin oluşturulduğu tablo bölümü ayarlaması ->
-    <tr>
-        <td><a href="1.html">Animasyon</a></td>
-        <td><a href="2.html">Aksiyon</a></td>
-        <td><a href="3.html">Bilim-Kurgu</a></td>
-        <td><a href="4.html">Sitcom</a></td>
-    </tr>
-</table>
-					
-<br/><br/><br/> 											<!- satır boşluğu bırakma ->
+        <section id="fotograflar">
+            <div class="foto-kapsayici">
+                <img src="images/fotonuz.jpg" alt="Birlikte ilk fotoğrafımız" class="kare-foto">
+                <p>İlk tanıştığımız gün...</p>
+            </div>
+            <div class="foto-kapsayici">
+                <img src="images/fotonuz2.png" alt="En sevdiğim tatil fotoğrafımız" class="kare-foto">
+                <p>O unutulmaz tatil anısı!</p>
+            </div>
+            </section>
 
-<div id="image-container">
-    <img src="you.jpg" width="45%" align="left" hspace="20" vspace="40"  />	        <!-1. içeriğin resmi -> 
-</div>
-    <h4><em>YOU SEVENLERE MÜJDE</em></h4>											<!-1.paragrafın başlık bölümü -> 
+        <section id="kapanis-mesaji">
+            <h3>Seni Çok Seviyorum!</h3>
+            <p>
+                Gelecek yıllarımızın da bugünden daha güzel olması dileğiyle...
+            </p>
+            <p class="imza">- Senin Aşkın, [Adınız]</p>
+        </section>
+    </main>
 
-<p id="paragraf">
-    Başrolünde Penn Badgley'nin "Joe Goldberg" karakteriyle bilinen popüler dizi You, beşinci ve final sezonuyla yayınlanmaya hazırlanıyor. Netflix tarafından yapılan açıklamaya göre, uzun süredir merakla beklenen bu sezonun yayın tarihi 2025 yılı olarak belirlendi. Psikolojik drama türündeki bu sürükleyici yapım, 2018 yılında ilk kez izleyiciyle buluştu ve bugüne kadar dört  sezon yayınladı. Seri, karanlık bir aşk hikayesini,saplantılı bir adamın hayatını başarılı bir şekilde izleyicilere aktardı. Beşinci sezonun, hikayeyi nasıl sonlandıracağı şimdiden büyük bir merak konusu.
-</p>												<!-1.paragrafın içerik bölümü -> 
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/> 
-
-<div id="image-container">
-    <img src="squidgame.webp" width="45%" align="right" hspace="20" vspace="15" /> 	<!-2. içeriğin resmi ->
-    <h4><em>SQUİD GAME İZLEYİCİLERİNE KÖTÜ HABER</em></h4>								<!-2.paragrafın başlık bölümü ->
-</div>
-<p id="paragraf">
-	Netflix’in dünya çapında çok konuşulan dizisi Squid Game, ilk sezonuyla hem eleştirmenlerden hem de izleyicilerden tam not almıştı. Sürükleyici hikâyesi, derin karakter analizleri ve toplumsal eleştirileriyle dikkat çeken bu yapım, birçok kişinin beklentisini zirveye çıkarmıştı. Ancak 2. sezon, bu beklentileri karşılamaktan oldukça uzak kaldı.Birçok kesim tarafından eleştirilerin odağı olan dizi sonu belli olmayan bir şekilde son buldu.Kim bilir belki yeni bir sezon daha çekilir.
-</p>					<!-2.paragrafın içerik bölümü -> 
-
-<br/><br/><br/><br/>
-<hr/>
-<p id="altyazı">										<!-alt metin  bölümü ->
- © 2025 Dizi Kütüphanesi. Tüm hakları saklıdır.
- </p>
+    <footer>
+        <p>&copy; 2024 Sonsuz Aşkımız.</p>
+    </footer>
+    
 </body>
 </html>

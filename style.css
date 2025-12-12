@@ -1,0 +1,103 @@
+/* Genel Ayarlar ve Font */
+body {
+    font-family: 'Georgia', serif; /* Daha romantik bir font */
+    background-color: #fce4ec; /* Açık pembe arka plan */
+    color: #4a148c; /* Morumsu ana metin rengi */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Başlık Alanı */
+header {
+    background-color: #880e4f; /* Koyu pembe/bordo arka plan */
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 3px;
+}
+
+/* Ana İçerik Alanı */
+main {
+    padding: 20px;
+    max-width: 900px; /* İçeriği ortalamak ve daraltmak için */
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+/* Mesaj ve Tarih Stilleri */
+#giris-mesaji h2 {
+    color: #d81b60; /* Daha canlı pembe */
+    font-style: italic;
+}
+
+.mesaj-paragraf {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.tarih, .sayac-bilgi {
+    font-size: 1em;
+    color: #ad1457;
+    font-weight: bold;
+}
+
+/* Fotoğraf Alanı */
+#fotograflar {
+    display: flex; /* Fotoğrafları yan yana dizer */
+    flex-wrap: wrap; /* Ekran küçülürse alt satıra geçmesini sağlar */
+    justify-content: space-around; /* Boşlukları eşit dağıtır */
+    gap: 20px; /* Fotoğraflar arası boşluk */
+}
+
+.foto-kapsayici {
+    width: 280px; /* Her bir fotoğraf bloğunun genişliği */
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffebee; /* Çok açık pembe */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.kare-foto {
+    width: 100%; /* Kapsayıcının %100'ü */
+    height: 250px; /* Yükseklik sabitleme */
+    object-fit: cover; /* Resmi keserek tam sığdırma */
+    border-radius: 8px;
+    border: 3px solid #d81b60; /* Fotoğraf çerçevesi */
+}
+
+/* İmza Alanı */
+#kapanis-mesaji h3 {
+    color: #4a148c;
+    font-size: 1.5em;
+}
+
+.imza {
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+/* Alt Bilgi */
+footer {
+    background-color: #880e4f;
+    color: white;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 0.8em;
+}
