@@ -1,89 +1,573 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Biz</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dilek & Bilal — Yıl Dönümümüz 💜</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        margin: 0;
-        background: #1a0f1f;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial;
-    }
+/* ====== Temel ====== */
+:root{
+  --deep-purple: #3b1c4a;     /* koyuya çalan romantik mor */
+  --mid-purple:  #5e2b86;
+  --soft-pink:   #ff6fb1;
+  --glass: rgba(255,255,255,0.06);
+  --accent: linear-gradient(135deg,#8e44ad,#c66fc6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(110,39,106,0.25), transparent),
+              linear-gradient(180deg,#2b1630 0%, #0f0612 100%);
+  color:#f5eef8;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
 
-    /* Çiçek animasyonu */
-    .flower {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        opacity: 0;
-        animation: bloom 2s forwards ease-out;
-    }
+/* ====== Sahne: uçan kalpler + ışık ====== */
+.scene {
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+}
+.glow {
+  position: absolute;
+  width: 1200px; height:1200px;
+  left: 50%; top:-20%;
+  transform:translateX(-50%);
+  background: radial-gradient(circle at 30% 30%, rgba(150,60,140,0.14), transparent 10%),
+              radial-gradient(circle at 70% 70%, rgba(110,40,120,0.10), transparent 20%);
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  opacity:0.9;
+}
 
-    @keyframes bloom {
-        0% { transform: scale(0.1) rotate(0deg); opacity: 0; }
-        100% { transform: scale(1) rotate(360deg); opacity: 1; }
-    }
+/* flying hearts - multiple via pseudo elements created in JS */
+.heart {
+  position: absolute;
+  width: 18px; height: 18px;
+  transform: rotate(-45deg);
+  background: var(--soft-pink);
+  border-radius:4px;
+  pointer-events:none;
+  z-index:0;
+  box-shadow: 0 6px 18px rgba(197,62,140,0.18);
+}
+.heart:before, .heart:after {
+  content:""; position:absolute; width:18px; height:18px; background:var(--soft-pink); border-radius:50%;
+}
+.heart:before{ top:-9px; left:0 }
+.heart:after { left:9px; top:0 }
 
-    /* Fotoğraf alanı */
-    .slideshow {
-        display: none;
-        width: 90%;
-        max-width: 460px;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 0 30px rgba(255, 170, 255, 0.3);
-        animation: fade 1.5s ease;
-    }
+/* ====== Layout ====== */
+.container{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+  margin:40px auto;
+  padding:28px;
+}
 
-    @keyframes fade {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+/* header */
+.header {
+  text-align:center;
+  margin-bottom:24px;
+}
+.logo {
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.header h1{
+  font-family:Marcellus, serif;
+  margin:14px 0 6px;
+  font-size:2.6rem;
+  letter-spacing:0.6px;
+  color: #ffe8fb;
+  text-shadow: 0 6px 18px rgba(150,40,120,0.25);
+}
+.header p.sub{
+  margin:0; opacity:0.9;
+  color:#f0dff4;
+}
 
-    .slideshow img {
-        width: 100%;
-        display: none;
-    }
+/* cards */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:22px;
+  align-items:start;
+}
+
+/* big romantic card */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius:18px;
+  padding:22px;
+  box-shadow: 0 8px 40px rgba(18,9,28,0.6);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* counter */
+.counter {
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:center;
+  margin:16px 0 8px;
+}
+.counter .num{
+  background: linear-gradient(180deg,#6f2e81,#4b1b5b);
+  padding:10px 18px;
+  border-radius:14px;
+  font-weight:700;
+  font-size:1.4rem;
+  color:white;
+  box-shadow: 0 6px 18px rgba(120,40,120,0.18);
+}
+.meta{opacity:0.9}
+
+/* glass button */
+.btn {
+  display:inline-block;
+  border:0;
+  padding:12px 18px;
+  border-radius:50px;
+  cursor:pointer;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color:#fff;
+  font-weight:600;
+  box-shadow: 0 6px 20px rgba(80,20,80,0.15);
+  transition: transform .16s ease, box-shadow .16s;
+  backdrop-filter: blur(6px);
+}
+.btn:active{ transform: translateY(2px) scale(.995) }
+
+/* side panel */
+.side {
+  position:relative;
+}
+.profile {
+  display:flex; gap:12px; align-items:center;
+  margin-bottom:12px;
+}
+.profile .avatar{
+  width:74px; height:74px; border-radius:14px; overflow:hidden;
+  border: 2px solid rgba(255,255,255,0.06);
+}
+.profile img{width:100%;height:100%;object-fit:cover}
+.profile .who{ font-weight:600; font-size:1rem }
+
+/* gallery thumbnails */
+.gallery {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+  margin-top:12px;
+}
+.thumb {
+  width:100%; height:120px; border-radius:12px; overflow:hidden; cursor:pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.03);
+  transition: transform .22s ease, box-shadow .22s;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb:hover{ transform: translateY(-6px); box-shadow:0 14px 30px rgba(120,40,120,0.18) }
+
+/* surprise section */
+.surprise {
+  margin-top:18px;
+  text-align:center;
+}
+.note { font-size:.95rem; opacity:0.9 }
+
+/* final large hero */
+.hero {
+  margin-top:18px;
+  padding:24px;
+  border-radius:14px;
+  background: linear-gradient(135deg, rgba(110,39,106,0.12), rgba(80,20,90,0.06));
+  text-align:center;
+  box-shadow: inset 0 0 40px rgba(255,255,255,0.01);
+}
+.hero h2 { font-family:Marcellus, serif; margin:0; font-size:1.9rem }
+.hero p { margin:8px 0 0; opacity:0.9 }
+
+/* modal (photo viewer / message) */
+.modal {
+  position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background: rgba(2,2,6,0.7); z-index:9999; opacity:0; pointer-events:none;
+  transition: opacity .28s ease;
+}
+.modal.show { opacity:1; pointer-events:auto; }
+.modal-inner {
+  max-width:900px; width:92%; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius:16px; padding:18px; position:relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+}
+.modal img{ width:100%; height:auto; border-radius:10px; display:block }
+.modal .close {
+  position:absolute; right:12px; top:12px; background:transparent; border:0; color:#fff; font-size:1.2rem; cursor:pointer;
+}
+
+/* audio bar */
+.audio-bar {
+  display:flex; gap:12px; align-items:center; justify-content:center; margin-top:12px;
+}
+.volume {
+  width:120px;
+}
+
+/* small responsive */
+@media (max-width:880px){
+  .grid{ grid-template-columns: 1fr; }
+  .side{ order:-1 }
+  .profile .avatar{ width:62px;height:62px }
+  .header h1{ font-size:2.1rem }
+}
 </style>
 </head>
 <body>
 
-<!-- İlk açılışta çiçek -->
-<img src="https://i.imgur.com/SXj5uMx.png" class="flower" id="flower">
-
-<!-- Fotoğraflar -->
-<div class="slideshow" id="show">
-    <img src="FOTO1.jpg">
-    <img src="FOTO2.jpg">
-    <img src="FOTO3.jpg">
-    <img src="FOTO4.jpg">
+<!-- SCENE LAYERS -->
+<div class="scene" aria-hidden="true">
+  <div class="glow"></div>
+  <!-- hearts created by JS -->
 </div>
 
+<!-- MAIN CONTENT -->
+<div class="container">
+  <header class="header">
+    <div class="logo">💜</div>
+    <h1>Yıl Dönümümüz</h1>
+    <p class="sub">Her anımız bir yıldız gibi parlamaya devam ediyor</p>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT: main romantic content -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>
+          <h3 style="margin:0;font-family:Marcellus">Sevgilim, <span id="her-name">[KIZIN_ADI]</span></h3>
+          <div class="meta" style="margin-top:6px">Sana adanmış küçük bir evren</div>
+        </div>
+        <div style="text-align:right">
+          <div class="counter">
+            <div class="num" id="days-count">0</div>
+            <div class="meta">gün birlikte</div>
+          </div>
+          <div style="font-size:.85rem;opacity:.9" id="since-date">Başlangıç: [GÜN.AY.YIL]</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; font-size:1.05rem; line-height:1.6; opacity:0.95">
+        <p id="lead-text">Seninle olmak, en sakin limanım oldu. Her anın bir melodisi, her gülüşün bir hikâye.</p>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <button class="btn" id="open-photo-1">İlk Fotoğrafımızı Gör 💞</button>
+        <button class="btn" id="open-photo-2">O Günün Anısı 📸</button>
+        <button class="btn" id="surprise-btn" title="Sürpriz!">Sürpriz Aç 🎉</button>
+      </div>
+
+      <div class="hero" aria-hidden="false">
+        <h2>Her gün yeni bir neden</h2>
+        <p>Bu sayfa sana her dokunuşta bir anı, bir fotoğraf, küçük bir not fısıldayacak.</p>
+
+        <div class="audio-bar">
+          <button class="btn" id="play-audio">► Çal: The Night We Met</button>
+          <div class="note">Eğer otomatik çalmıyorsa tarayıcı ses izinlerini aç veya oynat düğmesine bas.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: side panel (profil + gallery) -->
+    <aside class="side card">
+      <div class="profile">
+        <div class="avatar"><img id="avatar-img" src="images/avatar.jpg" alt="Sizin fotoğrafınız"></div>
+        <div>
+          <div class="who"><strong>[ADIN]</strong></div>
+          <div style="font-size:.85rem; opacity:.85">Aşkın Yaratıcısı</div>
+        </div>
+      </div>
+
+      <div class="gallery" id="thumbs">
+        <!-- thumbnails (buraya JS ile 7 foto gelecek) -->
+      </div>
+
+      <div class="surprise">
+        <p class="note">Butona basınca daha fazla anı ve küçük efektler açılacak.</p>
+        <button class="btn" id="open-memory">Anı Kutusunu Aç</button>
+      </div>
+    </aside>
+  </div>
+
+  <footer style="text-align:center; margin-top:28px; opacity:.8">
+    © 2025 — <strong id="footer-name">Dilek</strong> & Bilal
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-inner" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="close" id="modal-close" aria-label="Kapat">✕</button>
+    <div id="modal-content">
+      <!-- dinamik içerik -->
+    </div>
+  </div>
+</div>
+
+<!-- AUDIO (Kendi dosyanızı koyun: audio/the_night_we_met.mp3) -->
+<audio id="bg-audio" src="audio/the_night_we_met.mp3" preload="auto"></audio>
+
 <script>
-    // 2 saniye sonra çiçek kaybolup slayt başlasın
-    setTimeout(() => {
-        document.getElementById("flower").style.display = "none";
-        const box = document.getElementById("show");
-        box.style.display = "block";
+/* =========================
+   Ayarlar (Dolduruldu)
+   ========================= */
+const SETTINGS = {
+  yourName: "Bilal",
+  loverName: "Dilek",
+  startDate: "2023-11-17", // yyyy-mm-dd
+  avatar: "images/avatar.jpg",
+  // 7 fotoğraf: thumb ve large yolları (images klasörü içinde)
+  gallery: [
+    {thumb:"images/1_thumb.jpg", large:"images/1.jpg", caption:"İlk tanışma anımız"},
+    {thumb:"images/2_thumb.jpg", large:"images/2.jpg", caption:"O unutulmaz tatil"},
+    {thumb:"images/3_thumb.jpg", large:"images/3.jpg", caption:"Gülüşün beni büyülediğin an"},
+    {thumb:"images/4_thumb.jpg", large:"images/4.jpg", caption:"Kalbimin favori fotoğrafı"},
+    {thumb:"images/5_thumb.jpg", large:"images/5.jpg", caption:"Yağmurlu bir gün hatırası"},
+    {thumb:"images/6_thumb.jpg", large:"images/6.jpg", caption:"Sahildeki gün batımı"},
+    {thumb:"images/7_thumb.jpg", large:"images/7.jpg", caption:"Hikayemizin devamı"}
+  ]
+};
 
-        let photos = box.querySelectorAll("img");
-        let index = 0;
+/* ========== Başlangıç: isimleri uygula ========== */
+document.getElementById('her-name').textContent = SETTINGS.loverName;
+document.getElementById('avatar-img').src = SETTINGS.avatar;
+document.getElementById('footer-name').textContent = SETTINGS.loverName;
+document.getElementById('since-date').textContent = "Başlangıç: " + (new Date(SETTINGS.startDate)).toLocaleDateString();
 
-        function cycle() {
-            photos.forEach(p => p.style.display = "none");
-            photos[index].style.display = "block";
-            index = (index + 1) % photos.length;
-        }
+/* ========== Gün sayacı ========== */
+function updateDays() {
+  const start = new Date(SETTINGS.startDate + "T00:00:00");
+  const now = new Date();
+  const diff = Math.floor((now - start)/(1000*60*60*24));
+  document.getElementById('days-count').textContent = diff;
+}
+updateDays();
 
-        cycle();
-        setInterval(cycle, 2500); // her 2.5 saniyede fotoğraf değişsin
+/* ========== Küçük galeriyi doldur ========== */
+(function fillThumbs(){
+  const thumbs = document.getElementById('thumbs');
+  thumbs.innerHTML = '';
+  SETTINGS.gallery.forEach((g, i) => {
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.dataset.large = g.large;
+    div.dataset.caption = g.caption || '';
+    const img = document.createElement('img');
+    img.src = g.thumb;
+    img.alt = g.caption || ('Foto ' + (i+1));
+    div.appendChild(img);
+    thumbs.appendChild(div);
+  });
+})();
 
-    }, 2200);
+/* ========== Modal: foto / mesaj gösterimi ========== */
+const modal = document.getElementById('modal');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+function openModalWithImage(src, caption='') {
+  modalContent.innerHTML = `
+    <h3 id="modal-title" style="margin:0 0 8px;font-family:Marcellus">${caption}</h3>
+    <img src="${src}" alt="${caption}">
+    <p style="margin-top:10px; opacity:.9">Bu anıyı sevgiyle paylaşıyorum 💜</p>
+  `;
+  modal.classList.add('show');
+}
+function openModalWithText(html) {
+  modalContent.innerHTML = html;
+  modal.classList.add('show');
+}
+modalClose.addEventListener('click', ()=> modal.classList.remove('show'));
+modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.classList.remove('show'); });
+
+/* thumbs click */
+document.getElementById('thumbs').addEventListener('click', function(e){
+  const t = e.target.closest('.thumb');
+  if(!t) return;
+  const src = t.dataset.large;
+  const cap = t.dataset.caption;
+  openModalWithImage(src, cap);
+  burstHeartsAt(e.clientX, e.clientY);
+});
+
+/* buttons to open specific photos */
+document.getElementById('open-photo-1').addEventListener('click', ()=> {
+  openModalWithImage(SETTINGS.gallery[0].large, SETTINGS.gallery[0].caption);
+  spawnConfetti();
+});
+document.getElementById('open-photo-2').addEventListener('click', ()=> {
+  openModalWithImage(SETTINGS.gallery[1].large, SETTINGS.gallery[1].caption);
+  blossomHearts();
+});
+
+/* anı kutusu (sürpriz) */
+document.getElementById('open-memory').addEventListener('click', ()=> {
+  openModalWithText('<h3 id="modal-title" style="font-family:Marcellus">Anı Kutusu</h3><p>Seçtiğim birkaç favori anı açılıyor...</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">' +
+    SETTINGS.gallery.map(g => `<img src="${g.thumb}" style="width:140px;border-radius:10px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,0.6)" onclick="openModalWithImage('${g.large}','${g.caption.replace(/'/g,'\\\'')}')">`).join('') +
+    '</div><p style="margin-top:10px;opacity:.9">Sürpriz not: Beni hiç bırakma 💫</p>');
+  spawnConfetti();
+});
+
+/* sürpriz butonu (ana alanda) */
+document.getElementById('surprise-btn').addEventListener('click', ()=> {
+  openModalWithText('<h3 id="modal-title" style="font-family:Marcellus">Bir Sürpriz</h3><p>Bu anı için seçtiğim en güzel fotoğraf; hem rengin hem gülüşün... 💖</p><img src="'+SETTINGS.gallery[2].large+'" style="width:100%;border-radius:12px;margin-top:8px">');
+  blossomHearts();
+  spawnConfetti();
+});
+
+/* ========== Audio kontrol (tarayıcı otomatik çalma izinleri sebebiyle) ========== */
+const audio = document.getElementById('bg-audio');
+const playBtn = document.getElementById('play-audio');
+let audioPlaying = false;
+
+function tryAutoPlay() {
+  // attempt to play silently (some browsers allow if muted). We'll try, then show control.
+  audio.play().then(()=> {
+    audioPlaying = true;
+    playBtn.textContent = '🔊 Çalıyor: The Night We Met';
+  }).catch(()=> {
+    playBtn.textContent = '► Çal: The Night We Met';
+  });
+}
+tryAutoPlay();
+
+playBtn.addEventListener('click', ()=> {
+  if(audioPlaying){ audio.pause(); audioPlaying=false; playBtn.textContent='► Çal: The Night We Met'; }
+  else { audio.play().then(()=>{ audioPlaying=true; playBtn.textContent='🔊 Çalıyor: The Night We Met'; }).catch(()=>{ alert('Tarayıcı otomatik oynatmayı engelliyor. Lütfen sayfada bir kez tıklayın veya ses izinlerini kontrol edin.'); }); }
+});
+
+/* ========== Flying hearts (sürekli hafif) & interaktif patlamalar ========== */
+const scene = document.querySelector('.scene');
+
+function createHeart(x,y,size,delay,velX,velY,opacity=1){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.style.width = size + 'px';
+  h.style.height = size + 'px';
+  h.style.left = (x - size/2) + 'px';
+  h.style.top = (y - size/2) + 'px';
+  h.style.opacity = opacity;
+  h.style.transform = `rotate(-45deg) scale(${0.9 + Math.random()*0.3})`;
+  scene.appendChild(h);
+  const lifetime = 6000 + Math.random()*6000;
+  const start = performance.now();
+  const startX = x, startY=y;
+  function animate(t){
+    const dt = t - start;
+    const pct = dt / lifetime;
+    if(pct >= 1){ h.remove(); return; }
+    h.style.left = (startX + velX * dt/16) + 'px';
+    h.style.top  = (startY + velY * Math.pow(pct,1.1) * 200) + 'px';
+    h.style.opacity = 1 - pct*0.9;
+    requestAnimationFrame(animate);
+  }
+  setTimeout(()=> requestAnimationFrame(animate), delay || 0);
+}
+
+/* ambient küçük kalpler arkaplan */
+(function ambientHearts(){
+  const w = window.innerWidth, h = window.innerHeight;
+  setInterval(()=> {
+    const x = Math.random()*w;
+    const y = Math.random()*h*0.9;
+    createHeart(x,y,12,0, (Math.random()-0.5)*2, -20 - Math.random()*60, 0.65);
+  }, 700);
+})();
+
+/* burst hearts at position */
+function burstHeartsAt(x,y){
+  for(let i=0;i<12;i++){
+    const vx = (Math.random()-0.5)*24;
+    const vy = -10 - Math.random()*80;
+    createHeart(x + (Math.random()-0.5)*40, y + (Math.random()-0.5)*40, 12 + Math.random()*10, Math.random()*120, vx, vy);
+  }
+}
+
+/* blossom hearts centered */
+function blossomHearts(){
+  const cx = window.innerWidth/2;
+  const cy = window.innerHeight/3;
+  for(let i=0;i<30;i++){
+    const ang = Math.random()*Math.PI*2;
+    const vx = Math.cos(ang)*(40 + Math.random()*120);
+    const vy = Math.sin(ang)*(40 + Math.random()*120) - 40;
+    createHeart(cx + (Math.random()-0.5)*80, cy + (Math.random()-0.5)*60, 10 + Math.random()*14, i*20, vx, vy);
+  }
+}
+
+/* ========== Confetti (canvas basit) ========== */
+function spawnConfetti(){
+  const canvas = document.createElement('canvas');
+  canvas.style.position='fixed'; canvas.style.left=0; canvas.style.top=0; canvas.style.zIndex=9998;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  const pieces = [];
+  for(let i=0;i<120;i++){
+    pieces.push({
+      x: Math.random()*canvas.width,
+      y: -Math.random()*canvas.height,
+      w: 6+Math.random()*10,
+      h: 8+Math.random()*16,
+      vx: -2 + Math.random()*4,
+      vy: 2 + Math.random()*6,
+      color: ["#ff6fb1","#ffd1ec","#a66fc6","#8b3bd1","#fff3fb"][Math.floor(Math.random()*5)]
+    });
+  }
+  let t0 = null;
+  function frame(t){
+    if(!t0) t0 = t;
+    const dt = (t - t0)/1000;
+    t0 = t;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let p of pieces){
+      p.x += p.vx * (dt*60);
+      p.y += p.vy * (dt*60);
+      p.vy += 0.06;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+    }
+    // remove pieces that are off screen
+    if(pieces.every(p=> p.y > canvas.height + 50)){
+      canvas.remove();
+      return;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ======= small utility: click anywhere to enable audio if blocked ===== */
+document.body.addEventListener('click', function enableAudioOnFirstUserGesture(){
+  document.body.removeEventListener('click', enableAudioOnFirstUserGesture);
+  audio.play().then(()=> { audioPlaying=true; playBtn.textContent='🔊 Çalıyor: The Night We Met'; }).catch(()=>{ /* ignore */ });
+});
+
+/* Accessibility: ESC to close modal */
+document.addEventListener('keydown', e=> { if(e.key === 'Escape') modal.classList.remove('show'); });
+
+/* make clickable images in modal (delegated) */
+window.openModalWithImage = openModalWithImage; // allow inline onclick in generated HTML
 </script>
 
 </body>
