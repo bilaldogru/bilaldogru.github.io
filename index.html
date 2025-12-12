@@ -1,97 +1,566 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Dilek & Bilal</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dilek & Bilal — Yıl Dönümümüz 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: url('foto7.jpg') no-repeat center center fixed;
-        background-size: cover;
-        overflow: hidden;
-        font-family: sans-serif;
-    }
+/* ====== Temel ve Renk Paleti ====== */
+:root{
+ --deep-purple: #3b1c4a;
+ --mid-purple: #5e2b86;
+ --soft-pink:#ff6fb1;
+ --dark-bg: #0d0615; /* Daha koyu, daha dramatik */
+ --glass: rgba(255,255,255,0.06);
+ --accent: linear-gradient(135deg,#8e44ad,#c66fc6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+ margin:0;
+ font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+ /* Daha koyu arka plan */
+ background: radial-gradient(1200px 600px at 10% 10%, rgba(110,39,106,0.25), transparent),
+ linear-gradient(180deg, var(--dark-bg) 0%, #080309 100%);
+ color:#f5eef8;
+ -webkit-font-smoothing:antialiased;
+ overflow-x:hidden;
+}
 
-    /* Çiçek animasyonu */
-    .flower {
-        position: fixed;
-        top: -10vh;
-        width: 40px;
-        height: 40px;
-        background-image: url('https://i.imgur.com/1Q9Z1Zb.png');
-        background-size: cover;
-        animation: fall linear forwards;
-        opacity: 0.9;
-    }
+/* YENİ: Başlık Neon Titreşim Animasyonu */
+@keyframes neon-flicker {
+ 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 4px #fff, 0 0 10px var(--soft-pink), 0 0 18px var(--soft-pink); }
+ 20%, 24%, 55% { text-shadow: none; opacity:0.8; }
+}
 
-    @keyframes fall {
-        0% { transform: translateY(0vh) rotate(0deg); }
-        100% { transform: translateY(110vh) rotate(360deg); }
-    }
+/* ====== Sahne: uçan kalpler + ışık ====== */
+.scene {
+ position:fixed; inset:0; pointer-events:none; z-index:0;
+}
+.glow {
+ position: absolute;
+ width: 1200px; height:1200px;
+ left: 50%; top:-20%;
+ transform:translateX(-50%);
+ background: radial-gradient(circle at 30% 30%, rgba(150,60,140,0.18), transparent 10%),
+ radial-gradient(circle at 70% 70%, rgba(110,40,120,0.12), transparent 20%);
+ filter: blur(100px);
+ mix-blend-mode: screen;
+ opacity:0.9;
+}
 
-    /* Foto kolonu */
-    .left, .right {
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
+/* flying hearts */
+.heart {
+ position: absolute;
+ width: 18px; height: 18px;
+ transform: rotate(-45deg);
+ background: var(--soft-pink);
+ border-radius:4px;
+ pointer-events:none;
+ z-index:0;
+ box-shadow: 0 6px 18px rgba(197,62,140,0.18);
+}
+.heart:before, .heart:after {
+ content:""; position:absolute; width:18px; height:18px; background:var(--soft-pink); border-radius:50%;
+}
+.heart:before{ top:-9px; left:0 }
+.heart:after { left:9px; top:0 }
 
-    .left {
-        left: 20px;
-    }
+/* ====== Layout ====== */
+.container{
+ position:relative;
+ z-index:2;
+ max-width:1100px; /* Genişlettik */
+ margin:40px auto;
+ padding:28px;
+}
 
-    .right {
-        right: 20px;
-    }
+/* header */
+.header {
+ text-align:center;
+ margin-bottom:30px;
+}
+.logo {
+ display:inline-block;
+ padding:8px 18px;
+ border-radius:999px;
+ background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+ backdrop-filter: blur(6px);
+ border: 1px solid rgba(255,255,255,0.04);
+}
+.header h1{
+ font-family:Marcellus, serif;
+ margin:14px 0 6px;
+ font-size:3.2rem; /* Büyüttük */
+ letter-spacing:1px;
+ color: #ffe8fb;
+ animation: neon-flicker 3s infinite alternate; /* Animasyon ekledik */
+}
+.header p.sub{
+ margin:0; opacity:0.9;
+ color:#f0dff4;
+}
 
-    .photo {
-        width: 180px;
-        height: 240px;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(255,255,255,0.4);
-        transition: 0.3s;
-    }
+/* cards */
+.grid{
+ display:grid;
+ grid-template-columns: 1fr 360px;
+ gap:30px; /* Boşlukları artırdık */
+ align-items:start;
+}
 
-    .photo:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 25px rgba(255,255,255,0.8);
-    }
+/* big romantic card */
+.card {
+ background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+ border-radius:24px; /* Daha yuvarlak */
+ padding:28px;
+ box-shadow: 0 10px 50px rgba(18,9,28,0.7);
+ border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* counter */
+.counter {
+ display:flex;
+ gap:14px;
+ align-items:center;
+ justify-content:center;
+ margin:16px 0 8px;
+}
+.counter .num{
+ background: var(--accent); /* Gradient kullandık */
+ padding:12px 20px;
+ border-radius:18px;
+ font-weight:700;
+ font-size:1.6rem;
+ color:white;
+ box-shadow: 0 6px 20px rgba(120,40,120,0.3);
+}
+.meta{opacity:0.9}
+
+/* glass button */
+.btn {
+ display:inline-block;
+ border:0;
+ padding:12px 22px;
+ border-radius:50px;
+ cursor:pointer;
+ /* Daha belirgin glass efekti */
+ background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+ color:#fff;
+ font-weight:600;
+ box-shadow: 0 6px 24px rgba(80,20,80,0.25);
+ transition: transform .16s ease, box-shadow .16s;
+ backdrop-filter: blur(8px);
+}
+.btn:hover { box-shadow: 0 8px 30px rgba(80,20,80,0.4); }
+.btn:active{ transform: translateY(2px) scale(.995) }
+
+/* side panel */
+.side {
+ position:relative;
+}
+
+/* gallery (Yeni Simetrik Düzen) */
+.gallery {
+ /* 3 sola, 3 sağa (6 fotoğraf için) */
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 10px;
+ margin-top: 12px;
+}
+.thumb {
+ width: 100%; height: 100px; /* Daha küçük ve kareye yakın */
+ border-radius:10px; overflow:hidden; cursor:pointer;
+ box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+ border:1px solid rgba(255,255,255,0.05);
+ transition: transform .22s ease, box-shadow .22s;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb:hover{ transform: scale(1.05); box-shadow:0 14px 30px rgba(120,40,120,0.3) }
+
+/* surprise section */
+.surprise {
+ margin-top:20px;
+ text-align:center;
+}
+.note { font-size:.95rem; opacity:0.9 }
+
+/* final large hero */
+.hero {
+ margin-top:24px;
+ padding:28px;
+ border-radius:18px;
+ background: linear-gradient(135deg, rgba(110,39,106,0.18), rgba(80,20,90,0.1));
+ text-align:center;
+ box-shadow: inset 0 0 50px rgba(255,255,255,0.02);
+}
+.hero h2 { font-family:Marcellus, serif; margin:0; font-size:2rem }
+.hero p { margin:10px 0 0; opacity:0.9 }
+
+/* modal (photo viewer / message) */
+.modal {
+ position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
+ background: rgba(2,2,6,0.8); z-index:9999; opacity:0; pointer-events:none;
+ transition: opacity .3s ease;
+}
+.modal.show { opacity:1; pointer-events:auto; }
+.modal-inner {
+ max-width:900px; width:92%; background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+ border-radius:20px; padding:20px; position:relative;
+ box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+ border: 1px solid rgba(255,255,255,0.1);
+}
+.modal img{ width:100%; height:auto; border-radius:14px; display:block }
+
+/* audio bar */
+.audio-bar {
+ display:flex; gap:12px; align-items:center; justify-content:center; margin-top:16px;
+}
+
+/* small responsive */
+@media (max-width:880px){
+ .grid{ grid-template-columns: 1fr; }
+ .side{ order:-1 }
+ .header h1{ font-size:2.4rem }
+ .gallery { grid-template-columns: repeat(4, 1fr); }
+}
 </style>
 </head>
 <body>
 
-<!-- Sol 3 foto -->
-<div class="left">
-    <img src="foto1.jpg" class="photo">
-    <img src="foto2.jpg" class="photo">
-    <img src="foto3.jpg" class="photo">
+<div class="scene" aria-hidden="true">
+ <div class="glow"></div>
+ </div>
+
+<div class="container">
+ <header class="header">
+ <div class="logo">💜</div>
+ <h1>Yıl Dönümümüz</h1>
+ <p class="sub">Her anımız bir yıldız gibi parlamaya devam ediyor</p>
+ </header>
+
+ <div class="grid">
+ <div class="card">
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+ <div>
+ <h3 style="margin:0;font-family:Marcellus">Sevgilim, <span id="her-name">[KIZIN_ADI]</span></h3>
+ <div class="meta" style="margin-top:6px">Sana adanmış küçük bir evren</div>
+ </div>
+<div style="text-align:right">
+ <div class="counter">
+       <div class="num" id="days-count">0</div>
+            <div class="meta">gün birlikte</div>
+          </div>
+          <div style="font-size:.85rem;opacity:.9" id="since-date">Başlangıç: [GÜN.AY.YIL]</div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px; font-size:1.1rem; line-height:1.7; opacity:0.95">
+        <p id="lead-text">Seninle olmak, en sakin limanım oldu. Her anın bir melodisi, her gülüşün bir hikâye. Tüm bu zaman boyunca bana kattığın her şey için teşekkür ederim. Sen benim mucizemsin.</p>
+      </div>
+
+      <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center">
+        <button class="btn" id="open-photo-1">İlk Anımız 💞</button>
+        <button class="btn" id="open-photo-2">Favori Hatıra 📸</button>
+        <button class="btn" id="surprise-btn" title="Sürpriz!">Sürpriz Mesaj 🎉</button>
+      </div>
+
+      <div class="hero" aria-hidden="false">
+        <h2>Sonsuzluğumun İlk Yılı</h2>
+        <p>Bu sayfa sana her dokunuşta bir anı, bir fotoğraf, küçük bir not fısıldayacak. Daha fazlası için tıkla!</p>
+
+        <div class="audio-bar">
+          <button class="btn" id="play-audio">► Çal: The Night We Met</button>
+        </div>
+      </div>
+    </div>
+
+        <aside class="side card">
+      <div class="profile" style="justify-content:center;margin-bottom:20px">
+        <div class="avatar" style="width:90px;height:90px;border-radius:50%;border-color:var(--soft-pink);"><img id="avatar-img" src="images/avatar.jpg" alt="Sizin fotoğrafınız" style="border-radius:50%"></div>
+        <div>
+          <div class="who" style="font-size:1.1rem;text-align:center;"><strong>[ADIN]</strong></div>
+          <div style="font-size:.85rem; opacity:.85;text-align:center;">Sana ithafen ❤️</div>
+        </div>
+      </div>
+      
+      <h4 style="margin:0 0 10px;text-align:center;font-family:Marcellus">Özel Anlarımızdan Kareler</h4>
+      <div class="gallery" id="thumbs">
+              </div>
+
+      <div class="surprise">
+        <p class="note">Butona basınca daha fazla anı ve küçük efektler açılacak.</p>
+        <button class="btn" id="open-memory">Tüm Anıları Aç 🎁</button>
+      </div>
+    </aside>
+  </div>
+
+  <footer style="text-align:center; margin-top:35px; opacity:.75; font-size:.9rem">
+    © 2025 — <strong id="footer-name">Dilek</strong> & Bilal
+  </footer>
 </div>
 
-<!-- Sağ 3 foto -->
-<div class="right">
-    <img src="foto4.jpg" class="photo">
-    <img src="foto5.jpg" class="photo">
-    <img src="foto6.jpg" class="photo">
+<div class="modal" id="modal">
+  <div class="modal-inner" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="close" id="modal-close" aria-label="Kapat">✕</button>
+    <div id="modal-content">
+          </div>
+  </div>
 </div>
+
+<audio id="bg-audio" src="audio/the_night_we_met.mp3" preload="auto" loop></audio>
 
 <script>
-// Çiçek yağdırma
-function createFlower() {
-    const flower = document.createElement("div");
-    flower.classList.add("flower");
-    flower.style.left = Math.random() * 100 + "vw";
-    flower.style.animationDuration = (Math.random() * 4 + 3) + "s";
-    document.body.appendChild(flower);
+/* =========================
+   Ayarlar (Doldurmanız Gereken Kısım)
+   ========================= */
+const SETTINGS = {
+  yourName: "Bilal", // Kendi Adınız
+  loverName: "Dilek", // Kız Arkadaşınızın Adı
+  startDate: "2023-11-17", // Yıl dönümü başlangıç tarihi: yyyy-mm-dd
+  avatar: "images/avatar.jpg", // Kendi vesikalık/profil fotoğrafınızın yolu
+  // Fotoğraflar: Sadece 6 fotoğraf kullanın ve isimlendirme kuralına uyun
+  gallery: [
+    {thumb:"images/foto1_thumb.jpg", large:"images/foto1.jpg", caption:"Kalplerimizin Birleştiği An"},
+    {thumb:"images/foto2_thumb.jpg", large:"images/foto2.jpg", caption:"O Mükemmel Tatil Maceramız"},
+    {thumb:"images/foto3_thumb.jpg", large:"images/foto3.jpg", caption:"Birlikte Geçirdiğimiz En Güzel Gün"},
+    {thumb:"images/foto4_thumb.jpg", large:"images/foto4.jpg", caption:"Seninle Her Yer Güzel"},
+    {thumb:"images/foto5_thumb.jpg", large:"images/foto5.jpg", caption:"Sadece İkimiz"},
+    {thumb:"images/foto6_thumb.jpg", large:"images/foto6.jpg", caption:"Gelecek Yıllarımızın Sözü"}
+  ]
+};
 
-    setTimeout(() => flower.remove(), 7000);
+// Sürpriz mesajlar (Daha romantik ve size özel hale getirebilirsiniz)
+const surpriseMessages = [
+  `<h3 id="modal-title" style="font-family:Marcellus">Benden Sana Özel Not:</h3><p style="font-size:1.1rem;color:var(--soft-pink);text-shadow:0 0 5px var(--soft-pink)">"Seninle geçirdiğim her gün, ömrümün en güzel sayfalarını yazıyor. Teşekkür ederim, sonsuz aşkım."</p>`,
+  `<h3 id="modal-title" style="font-family:Marcellus">Bir Söz:</h3><p style="font-size:1.1rem;color:var(--soft-pink);text-shadow:0 0 5px var(--soft-pink)">"Gözlerin, benim için tüm yıldızlardan daha parlak. Seni ilk gördüğüm gün, kaderime aşık oldum."</p>`,
+  `<h3 id="modal-title" style="font-family:Marcellus">Kalpten Bir Mesaj:</h3><p style="font-size:1.1rem;color:var(--soft-pink);text-shadow:0 0 5px var(--soft-pink)">"Hayat yolculuğumda bana eşlik ettiğin için şanslıyım. Kalbim her zaman seninle atacak."</p>`
+];
+
+/* ========== Başlangıç: isimleri uygula ========== */
+document.getElementById('her-name').textContent = SETTINGS.loverName;
+document.getElementById('avatar-img').src = SETTINGS.avatar;
+document.getElementById('footer-name').textContent = SETTINGS.loverName;
+document.getElementById('since-date').textContent = "Başlangıç: " + (new Date(SETTINGS.startDate)).toLocaleDateString('tr-TR', {year: 'numeric', month: 'long', day: 'numeric'});
+
+/* ========== Gün sayacı ========== */
+function updateDays() {
+  const start = new Date(SETTINGS.startDate + "T00:00:00");
+  const now = new Date();
+  const diff = Math.floor((now - start)/(1000*60*60*24));
+  document.getElementById('days-count').textContent = diff;
+}
+updateDays();
+
+/* ========== Küçük galeriyi doldur ========== */
+(function fillThumbs(){
+  const thumbs = document.getElementById('thumbs');
+  thumbs.innerHTML = '';
+  // Sadece ilk 6 fotoğrafı alıyoruz
+  SETTINGS.gallery.slice(0, 6).forEach((g, i) => { 
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.dataset.large = g.large;
+    div.dataset.caption = g.caption || '';
+    const img = document.createElement('img');
+    img.src = g.thumb;
+    img.alt = g.caption || ('Foto ' + (i+1));
+    div.appendChild(img);
+    thumbs.appendChild(div);
+  });
+})();
+
+/* ========== Modal: foto / mesaj gösterimi ========== */
+const modal = document.getElementById('modal');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+function openModalWithImage(src, caption='') {
+  modalContent.innerHTML = `
+    <h3 id="modal-title" style="margin:0 0 12px;font-family:Marcellus;color:var(--soft-pink);text-align:center">${caption}</h3>
+    <img src="${src}" alt="${caption}">
+    <p style="margin-top:12px; opacity:.9;text-align:center">Bu anıyı sevgiyle paylaşıyorum 💜</p>
+  `;
+  modal.classList.add('show');
+}
+function openModalWithText(html) {
+  modalContent.innerHTML = html;
+  modal.classList.add('show');
+}
+modalClose.addEventListener('click', ()=> modal.classList.remove('show'));
+modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.classList.remove('show'); });
+
+/* thumbs click */
+document.getElementById('thumbs').addEventListener('click', function(e){
+  const t = e.target.closest('.thumb');
+  if(!t) return;
+  const src = t.dataset.large;
+  const cap = t.dataset.caption;
+  openModalWithImage(src, cap);
+  burstHeartsAt(e.clientX, e.clientY);
+});
+
+/* buttons to open specific photos */
+document.getElementById('open-photo-1').addEventListener('click', ()=> {
+  openModalWithImage(SETTINGS.gallery[0].large, SETTINGS.gallery[0].caption);
+  spawnConfetti();
+});
+document.getElementById('open-photo-2').addEventListener('click', ()=> {
+  openModalWithImage(SETTINGS.gallery[1].large, SETTINGS.gallery[1].caption);
+  blossomHearts();
+});
+
+/* anı kutusu (tüm anıları aç) */
+document.getElementById('open-memory').addEventListener('click', ()=> {
+  openModalWithText('<h3 id="modal-title" style="font-family:Marcellus;color:var(--soft-pink);text-align:center">Tüm Anılarımız</h3><p style="text-align:center">Birlikte yazdığımız tüm hikayeler...</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px">' +
+    SETTINGS.gallery.map(g => `<img src="${g.thumb}" style="width:140px;height:140px;object-fit:cover;border-radius:12px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.6)" onclick="window.openModalWithImage('${g.large}','${g.caption.replace(/'/g,'\\\'')}')">`).join('') +
+    '</div><p style="margin-top:20px;opacity:.9;text-align:center">Sürpriz not: Beni hiç bırakma 💫</p>');
+  spawnConfetti();
+});
+
+/* sürpriz butonu (ana alanda) */
+document.getElementById('surprise-btn').addEventListener('click', ()=> {
+  // Rastgele bir sürpriz mesajı seç
+  const randomIndex = Math.floor(Math.random() * surpriseMessages.length);
+  openModalWithText(surpriseMessages[randomIndex]);
+  blossomHearts();
+  spawnConfetti();
+});
+
+/* ========== Audio kontrol ========== */
+const audio = document.getElementById('bg-audio');
+const playBtn = document.getElementById('play-audio');
+let audioPlaying = false;
+
+function tryAutoPlay() {
+  audio.play().then(()=> { 
+    audioPlaying = true; 
+    playBtn.textContent = '🔊 Çalıyor: The Night We Met'; 
+  }).catch(()=> { 
+    playBtn.textContent = '► Çal: The Night We Met'; 
+  });
+}
+tryAutoPlay();
+
+playBtn.addEventListener('click', ()=> {
+  if(audioPlaying){ audio.pause(); audioPlaying=false; playBtn.textContent='► Çal: The Night We Met'; }
+  else { audio.play().then(()=>{ audioPlaying=true; playBtn.textContent='🔊 Çalıyor: The Night We Met'; }).catch(()=>{ alert('Tarayıcı otomatik oynatmayı engelliyor. Lütfen sayfada bir kez tıklayın veya ses izinlerini kontrol edin.'); }); }
+});
+
+/* ========== Flying hearts (sürekli hafif) & interaktif patlamalar ========== */
+const scene = document.querySelector('.scene');
+
+function createHeart(x,y,size,delay,velX,velY,opacity=1){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.style.width = size + 'px';
+  h.style.height = size + 'px';
+  h.style.left = (x - size/2) + 'px';
+  h.style.top = (y - size/2) + 'px';
+  h.style.opacity = opacity;
+  h.style.transform = `rotate(-45deg) scale(${0.9 + Math.random()*0.3})`;
+  scene.appendChild(h);
+  const lifetime = 6000 + Math.random()*6000;
+  const start = performance.now();
+  const startX = x, startY=y;
+  function animate(t){
+    const dt = t - start;
+    const pct = dt / lifetime;
+    if(pct >= 1){ h.remove(); return; }
+    h.style.left = (startX + velX * dt/16) + 'px';
+    h.style.top  = (startY + velY * Math.pow(pct,1.1) * 200) + 'px';
+    h.style.opacity = 1 - pct*0.9;
+    requestAnimationFrame(animate);
+  }
+  setTimeout(()=> requestAnimationFrame(animate), delay || 0);
 }
 
-setInterval(createFlower, 400);
+/* ambient küçük kalpler arkaplan */
+(function ambientHearts(){
+  const w = window.innerWidth, h = window.innerHeight;
+  setInterval(()=> {
+    const x = Math.random()*w;
+    const y = Math.random()*h*0.9;
+    createHeart(x,y,12,0, (Math.random()-0.5)*2, -20 - Math.random()*60, 0.65);
+  }, 700);
+})();
+
+/* burst hearts at position */
+function burstHeartsAt(x,y){
+  for(let i=0;i<16;i++){ // daha fazla kalp
+    const vx = (Math.random()-0.5)*30;
+    const vy = -15 - Math.random()*90;
+    createHeart(x + (Math.random()-0.5)*50, y + (Math.random()-0.5)*50, 14 + Math.random()*12, Math.random()*150, vx, vy);
+  }
+}
+
+/* blossom hearts centered */
+function blossomHearts(){
+  const cx = window.innerWidth/2;
+  const cy = window.innerHeight/3;
+  for(let i=0;i<40;i++){ // daha fazla kalp
+    const ang = Math.random()*Math.PI*2;
+    const vx = Math.cos(ang)*(50 + Math.random()*150);
+    const vy = Math.sin(ang)*(50 + Math.random()*150) - 50;
+    createHeart(cx + (Math.random()-0.5)*80, cy + (Math.random()-0.5)*60, 12 + Math.random()*16, i*15, vx, vy);
+  }
+}
+
+/* ========== Confetti (canvas basit) ========== */
+function spawnConfetti(){
+  const canvas = document.createElement('canvas');
+  canvas.style.position='fixed'; canvas.style.left=0; canvas.style.top=0; canvas.style.zIndex=9998;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  const pieces = [];
+  for(let i=0;i<150;i++){ // daha fazla konfeti
+    pieces.push({
+      x: Math.random()*canvas.width,
+      y: -Math.random()*canvas.height,
+      w: 7+Math.random()*12,
+      h: 9+Math.random()*18,
+      vx: -2 + Math.random()*4,
+      vy: 2 + Math.random()*7,
+      color: ["#ff6fb1","#ffd1ec","#a66fc6","#8b3bd1","#fff3fb"][Math.floor(Math.random()*5)]
+    });
+  }
+  let t0 = null;
+  function frame(t){
+    if(!t0) t0 = t;
+    const dt = (t - t0)/1000;
+    t0 = t;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let p of pieces){
+      p.x += p.vx * (dt*60);
+      p.y += p.vy * (dt*60);
+      p.vy += 0.08; // daha hızlı düşme
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+    }
+    if(pieces.every(p=> p.y > canvas.height + 50)){
+      canvas.remove();
+      return;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ======= small utility: click anywhere to enable audio if blocked ===== */
+document.body.addEventListener('click', function enableAudioOnFirstUserGesture(){
+  document.body.removeEventListener('click', enableAudioOnFirstUserGesture);
+  audio.play().then(()=> { audioPlaying=true; playBtn.textContent='🔊 Çalıyor: The Night We Met'; }).catch(()=>{ /* ignore */ });
+});
+
+/* Accessibility: ESC to close modal */
+document.addEventListener('keydown', e=> { if(e.key === 'Escape') modal.classList.remove('show'); });
+
+/* make clickable images in modal (delegated) */
+window.openModalWithImage = openModalWithImage;
 </script>
 
 </body>
